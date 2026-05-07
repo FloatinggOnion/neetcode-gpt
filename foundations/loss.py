@@ -22,7 +22,8 @@ class Solution:
         # y_pred: predicted probabilities (shape: n_samples x n_classes)
         # Hint: add a small epsilon (1e-7) to y_pred to avoid log(0)
         # return round(your_answer, 4)
-        value = y_true * np.log(y_pred + 1e-7)
+        epsilon = 1e-7
+        value = y_true * np.log(np.clip(y_pred, epsilon, 1 - epsilon))
         loss = -1/len(y_true) * np.sum(value)
 
         return round(loss, 4)
